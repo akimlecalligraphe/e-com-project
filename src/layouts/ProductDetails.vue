@@ -1,11 +1,27 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref, watchEffect } from 'vue';
 
 const props = defineProps({
   id: Number,
 });
 
-console.log(props.data);
+const dataTable = ref([]);
+const error = ref(null);
+
+// Fetch data function
+watchEffect(async () => {
+  try {
+    const response = await fetch(`https://dummyjson.com/products/${props.id}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    dataTable.value = await response.json();
+    // console.log(data.value.products);
+
+  } catch (err) {
+    error.value = err.message;
+  }
+});
 
 
 </script>
@@ -27,9 +43,9 @@ console.log(props.data);
     </svg>
   </button>
 
-  <div v-if="data">
+  <div>
     <el-dialog>
-      <dialog id="modal" class="relative z-10 backdrop:bg-transparent">
+      <dialog class="relative z-10 backdrop:bg-transparent">
         <el-dialog-backdrop
           class="fixed inset-0 hidden bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in md:block"></el-dialog-backdrop>
         <div tabindex="0" class="fixed inset-0 z-10 w-screen overflow-y-auto focus:outline-none">
@@ -52,7 +68,7 @@ console.log(props.data);
                     alt="Two each of gray, white, and black shirts arranged on table."
                     class="aspect-2/3 w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5" />
                   <div class="sm:col-span-8 lg:col-span-7">
-                    <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">Basic Tee 6-Pack</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">{{dataTable.title}}</h2>
                     <section aria-labelledby="information-heading" class="mt-2">
                       <h3 id="information-heading" class="sr-only">Product information</h3>
                       <p class="text-2xl text-gray-900">$192</p>
