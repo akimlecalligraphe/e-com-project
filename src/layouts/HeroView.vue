@@ -5,7 +5,6 @@
 
 
 <template>
-
   <div class="relative overflow-hidden">
     <div class="md:mt-[200px] pt-8 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
       <div class="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
@@ -66,16 +65,14 @@
               </div>
             </div>
 
-            <a href="#"
-              class="inline-block rounded-md border border-transparent bg-gray-900 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700">Shop
-              Collection</a>
+            <button
+              class="inline-block rounded-md border border-transparent bg-gray-900 px-8 py-3 text-center font-medium text-white hover:bg-gray-700 cursor-pointer">Shop
+              Collection</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
 </template>
 
 

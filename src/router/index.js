@@ -4,6 +4,7 @@ import HomeView from '@/layouts/HeroView.vue'
 import ProductsView from '@/layouts/ProductsView.vue'
 import Login from '@/layouts/Login.vue'
 import SignUp from '@/layouts/SignUp.vue'
+import Details from '@/layouts/ProductDetails.vue'
 
 const routes = [
   {
@@ -17,6 +18,12 @@ const routes = [
     component: ProductsView
   },
   {
+    path: '/products/:id',
+    name: 'products.show',
+    component: () => import('@/layouts/ProductDetails.vue'),
+    props:(route) => ({id: parseInt(route.params.id)})
+  },
+  {
     path: '/signup',
     name: 'signup',
     component: SignUp
@@ -25,6 +32,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Details
   },
 ]
 
